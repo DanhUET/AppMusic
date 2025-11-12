@@ -21,4 +21,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "App Music"
 include(":app")
- 
+include(":core-ui")
+include(":feature-home")
+include(":feature-library")
+include(":feature-discovery")
+include(":feature-album")
+include(":feature-recommended")
+include(":feature-player")
+include(":feature-recent-heard")

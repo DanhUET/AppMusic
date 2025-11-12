@@ -33,10 +33,24 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures {
+        viewBinding=true
+    }
 }
 
 dependencies {
+    implementation(project(":feature-home"))
+    implementation(project(":feature-library"))
+    implementation(project(":feature-discovery"))
+    implementation(project(":core-ui"))
+    implementation(project(":feature-album"))
+    implementation(project(":feature-player"))
+    implementation(project(":feature-recommended"))
 
+    //navigation
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
