@@ -9,5 +9,14 @@
         android:id="@+id/home2"
         android:name="com.danh.feature_home.Home"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home2_to_fragment_more_recommended"
+            app:destination="@id/fragment_more_recommended" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_recommended_all_song"
+        android:id="@+id/fragment_more_recommended"
+        android:name="com.danh.feature_recommended.RecommendedAllSong"
+        android:label="RecommendedAllSong" />
 </navigation>

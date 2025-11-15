@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -46,7 +47,7 @@ dependencies {
     implementation(project(":feature-album"))
     implementation(project(":feature-player"))
     implementation(project(":feature-recommended"))
-
+    implementation(project(":core-navigation"))
     //navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)

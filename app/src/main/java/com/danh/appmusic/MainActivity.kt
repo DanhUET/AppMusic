@@ -5,13 +5,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.danh.appmusic.databinding.ActivityMainBinding
+import com.danh.appmusic.navigition.home.AppRecommendedMoreNavigation
+import com.danh.core_navigation.home.RecommendedNavigation
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecommendedNavigation {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,5 +37,11 @@ class MainActivity : AppCompatActivity() {
         // thiết lập bottom navigation
         val bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setupWithNavController(navController)
+    }
+    private val recommendedNavigator = AppRecommendedMoreNavigation()
+
+    override fun openMoreRecommended(from: Fragment) {
+        // forward cho implementation thật
+        recommendedNavigator.openMoreRecommended(from)
     }
 }

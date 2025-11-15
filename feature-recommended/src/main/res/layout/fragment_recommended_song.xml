@@ -5,34 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecommendedSong">
+
     <TextView
-        android:id="@+id/tv_recommended"
+        android:id="@+id/btn_all_song"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/title_recommended"
+        android:drawableEnd="@drawable/ic_alllist"
+        android:drawablePadding="4dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_alllist"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_recommended"
-        app:layout_constraintStart_toEndOf="@+id/tv_recommended"
-        app:layout_constraintTop_toTopOf="@+id/tv_recommended" />
-
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_song"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_recommended" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/btn_all_song">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcyRS"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            tools:listitem="@layout/item_song" />
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

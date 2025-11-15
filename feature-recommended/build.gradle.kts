@@ -30,10 +30,20 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
+    implementation(project(":core-navigation"))
+    implementation(project(":core-network"))
+    // gson
+    implementation("com.google.code.gson:gson:2.10.1")
+// glide
+    implementation("com.github.bumptech.glide:glide:4.11.0")
     implementation(project(":core-ui"))
+
     //navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)

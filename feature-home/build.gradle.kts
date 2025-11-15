@@ -30,9 +30,17 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
+    implementation(project(":core-ui"))
+    implementation(project(":feature-album"))
+    implementation(project(":feature-recommended"))
+    implementation(project(":core-network"))
+    implementation(project(":core-navigation"))
     //navigation
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
