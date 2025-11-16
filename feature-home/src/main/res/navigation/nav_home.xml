@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home"
-    app:startDestination="@id/home2">
-
+    app:startDestination="@id/fragment_home">
     <fragment
-        android:id="@+id/home2"
+        android:id="@+id/fragment_home"
         android:name="com.danh.feature_home.Home"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_home2_to_fragment_more_recommended"
+            android:id="@+id/action_fragment_home_to_fragment_more_albums"
+            app:destination="@id/fragment_more_albums" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_more_recommended"
             app:destination="@id/fragment_more_recommended" />
+        <action
+            android:id="@+id/action_fragment_home_to_fragment_detail_album"
+            app:destination="@id/fragment_detail_album" />
     </fragment>
     <fragment
-        tools:layout="@layout/fragment_recommended_all_song"
+        android:id="@+id/fragment_more_albums"
+        android:name="com.danh.feature_album.ui.ListAlbums"
+        android:label="ListAlbums"
+        tools:layout="@layout/fragment_list_albums" />
+    <fragment
         android:id="@+id/fragment_more_recommended"
         android:name="com.danh.feature_recommended.RecommendedAllSong"
-        android:label="RecommendedAllSong" />
+        android:label="RecommendedAllSong"
+        tools:layout="@layout/fragment_recommended_all_song" />
+    <fragment
+        tools:layout="@layout/fragment_detail_album"
+        android:id="@+id/fragment_detail_album"
+        android:name="com.danh.feature_album.ui.DetailAlbum"
+        android:label="DetailAlbum" >
+        <argument
+            android:name="idAlbum"
+            app:argType="string"
+            android:defaultValue="0" />
+        <argument
+            android:name="number"
+            app:argType="string"
+            android:defaultValue="0" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
 </navigation>

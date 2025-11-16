@@ -9,7 +9,7 @@ import com.danh.core_network.model.song.Song
 import com.danh.core_ui.databinding.ItemSongBinding
 import com.danh.feature_recommended.R
 
-class RSAdapter(val songList: MutableList<Song>) : RecyclerView.Adapter<RSAdapter.ViewHolder>() {
+class RSAdapter(val songList: MutableList<Song>,private val lister: OnClickItem) : RecyclerView.Adapter<RSAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -29,7 +29,7 @@ class RSAdapter(val songList: MutableList<Song>) : RecyclerView.Adapter<RSAdapte
         return songList.size
     }
 
-    class ViewHolder(private val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
             binding.tvTitle.text = song.title
             binding.tvAirtist.text = song.artist
@@ -37,6 +37,9 @@ class RSAdapter(val songList: MutableList<Song>) : RecyclerView.Adapter<RSAdapte
                 .load(song.image)
                 .error(R.drawable.ic_error_music)
                 .into(binding.image)
+            binding.root.setOnClickListener {
+                lister.playMusic(song)
+            }
         }
     }
 
@@ -45,5 +48,8 @@ class RSAdapter(val songList: MutableList<Song>) : RecyclerView.Adapter<RSAdapte
         songList.clear()
         songList.addAll(songs)
         notifyDataSetChanged()
+    }
+    interface OnClickItem{
+        fun playMusic(song: Song)
     }
 }

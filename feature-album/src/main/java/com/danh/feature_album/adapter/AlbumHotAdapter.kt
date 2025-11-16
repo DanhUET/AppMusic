@@ -9,7 +9,7 @@ import com.danh.core_network.model.albums.Album
 import com.danh.core_ui.databinding.ItemAlbumHotBinding
 import com.danh.core_ui.databinding.ItemSongBinding
 
-class AlbumHotAdapter(private val albumList: MutableList<Album>) :
+class AlbumHotAdapter(private val albumList: MutableList<Album>,private val lister: OnClickItem) :
     RecyclerView.Adapter<AlbumHotAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -26,12 +26,16 @@ class AlbumHotAdapter(private val albumList: MutableList<Album>) :
 
     override fun getItemCount() = albumList.size
 
-    class ViewHolder(private val binding: ItemAlbumHotBinding) :
+    inner class ViewHolder(private val binding: ItemAlbumHotBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(album: Album) {
             binding.tvTitle.text = album.name
             Glide.with(binding.root).load(album.image).into(binding.imageAlbum)
+            binding.imageAlbum.setOnClickListener {
+                lister.getDetailAlbum(album)
+            }
         }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -41,4 +45,7 @@ class AlbumHotAdapter(private val albumList: MutableList<Album>) :
         notifyDataSetChanged()
     }
 
+    interface OnClickItem {
+        fun getDetailAlbum(album:Album)
+    }
 }

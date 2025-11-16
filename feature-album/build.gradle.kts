@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core-navigation"))
     implementation(project(":core-ui"))
     implementation(project(":core-network"))
     // retrofit

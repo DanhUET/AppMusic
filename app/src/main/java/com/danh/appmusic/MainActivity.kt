@@ -8,19 +8,22 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.danh.appmusic.databinding.ActivityMainBinding
-import com.danh.appmusic.navigition.home.AppRecommendedMoreNavigation
+import com.danh.appmusic.navigition.home.AppAlbumNavigation
+import com.danh.appmusic.navigition.home.AppRecommendedNavigator
+import com.danh.core_navigation.home.AlbumsNavigation
 import com.danh.core_navigation.home.RecommendedNavigation
 
-class MainActivity : AppCompatActivity(), RecommendedNavigation {
+class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigation {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding=ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,16 +35,23 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation {
             v.setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, bars.bottom)
             WindowInsetsCompat.CONSUMED
         }
-        val navHostFragment =supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         // thiết lập bottom navigation
         val bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setupWithNavController(navController)
     }
-    private val recommendedNavigator = AppRecommendedMoreNavigation()
 
     override fun openMoreRecommended(from: Fragment) {
-        // forward cho implementation thật
-        recommendedNavigator.openMoreRecommended(from)
+        AppRecommendedNavigator().openMoreRecommended(from)
+    }
+
+    override fun openMoreAlbums(from: Fragment) {
+        AppAlbumNavigation().openMoreAlbums(from)
+    }
+
+    override fun openDetailAlbum(from: Fragment,id:String,number:String,image:String,title:String) {
+        AppAlbumNavigation().openDetailAlbum(from,id,number,image,title)
     }
 }
