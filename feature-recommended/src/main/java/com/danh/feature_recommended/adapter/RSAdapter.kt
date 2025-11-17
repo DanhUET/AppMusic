@@ -38,7 +38,8 @@ class RSAdapter(val songList: MutableList<Song>,private val lister: OnClickItem)
                 .error(R.drawable.ic_error_music)
                 .into(binding.image)
             binding.root.setOnClickListener {
-                lister.playMusic(song)
+                val position = bindingAdapterPosition
+                lister.playMusic(songList,position)
             }
         }
     }
@@ -50,6 +51,6 @@ class RSAdapter(val songList: MutableList<Song>,private val lister: OnClickItem)
         notifyDataSetChanged()
     }
     interface OnClickItem{
-        fun playMusic(song: Song)
+        fun playMusic(songList: List<Song>,position:Int)
     }
 }

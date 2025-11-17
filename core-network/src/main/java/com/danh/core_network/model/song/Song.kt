@@ -1,5 +1,8 @@
 package com.danh.core_network.model.song
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import com.google.gson.annotations.SerializedName
+@Parcelize
 data class Song(
     val id: String,
     val title: String,
@@ -11,4 +14,4 @@ data class Song(
     val counter:String,
     val replay:String,
     @SerializedName("track_number") val trackNumber:String,
-)
+) : Parcelable

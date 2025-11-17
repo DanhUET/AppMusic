@@ -46,8 +46,11 @@ class RecommendedSong( ) : Fragment() {
 
     private fun setUpViews() {
         recommendedSongAdapter= RSAdapter(mutableListOf(),object : RSAdapter.OnClickItem{
-            override fun playMusic(song: Song) {
-                SongService.startPlay(requireActivity(),song)
+            override fun playMusic(
+                songList: List<Song>,
+                position: Int
+            ) {
+                SongService.startPlay(requireActivity(),songList,position)
             }
 
         })
