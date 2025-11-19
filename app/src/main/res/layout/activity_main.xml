@@ -17,15 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
+
     <androidx.fragment.app.FragmentContainerView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/fragment_mini_player"
+        android:name="com.danh.feature_player.MiniPlayer"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:name="com.danh.feature_player.MiniPlayer"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout="@layout/fragment_mini_player"
+        tools:visibility="visible" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

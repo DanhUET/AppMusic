@@ -1,6 +1,7 @@
 package com.danh.appmusic
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -16,8 +17,9 @@ import com.danh.appmusic.navigition.home.AppAlbumNavigation
 import com.danh.appmusic.navigition.home.AppRecommendedNavigator
 import com.danh.core_navigation.home.AlbumsNavigation
 import com.danh.core_navigation.home.RecommendedNavigation
+import com.danh.feature_player.MiniPlayerHost
 
-class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigation {
+class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigation, MiniPlayerHost {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,5 +55,13 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigatio
 
     override fun openDetailAlbum(from: Fragment,id:String,number:String,image:String,title:String) {
         AppAlbumNavigation().openDetailAlbum(from,id,number,image,title)
+    }
+
+    override fun showMiniPlayer() {
+        binding.fragmentMiniPlayer.visibility = View.VISIBLE
+    }
+
+    override fun hideMiniPlayer() {
+       binding.fragmentMiniPlayer.visibility=View.GONE
     }
 }

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.danh.core_network.model.song.Song
 import com.danh.core_ui.databinding.ItemSongBinding
 
-class RSAllAdapter(private val songList: MutableList<Song>) :
+class RSAllAdapter(private val songList: MutableList<Song>, private val listener: OnClickItem) :
     RecyclerView.Adapter<RSAllAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -23,20 +23,28 @@ class RSAllAdapter(private val songList: MutableList<Song>) :
     }
 
     override fun getItemCount() = songList.size
-    class ViewHolder(private val binding: ItemSongBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemSongBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
             binding.tvTitle.text = song.title
             binding.tvAirtist.text = song.artist
             Glide.with(binding.root).load(song.image).into(binding.image)
-
+            binding.root.setOnClickListener {
+                listener.playMusic(songList, bindingAdapterPosition)
+            }
         }
 
     }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun updateAllSongs(songs:List<Song>){
+    fun updateAllSongs(songs: List<Song>) {
         songList.clear()
         songList.addAll(songs)
         notifyDataSetChanged()
+    }
+
+    interface OnClickItem {
+        fun playMusic(songList: List<Song>, position: Int)
     }
 
 }

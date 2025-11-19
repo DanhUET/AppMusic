@@ -9,11 +9,12 @@
     <application>
         <service
             android:name=".SongService"
-            android:enabled="true"
-            android:exported="true"
-            android:foregroundServiceType="mediaPlayback"
-            />
-
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

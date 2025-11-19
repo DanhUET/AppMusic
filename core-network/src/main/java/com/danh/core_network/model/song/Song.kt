@@ -13,5 +13,5 @@ data class Song(
     val favorite:String,
     val counter:String,
     val replay:String,
-    @SerializedName("track_number") val trackNumber:String,
+    @SerializedName("track_number") val trackNumber:String?=null,
 ) : Parcelable

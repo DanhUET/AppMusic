@@ -14,7 +14,7 @@ class AlbumRepositoryImpl : AlbumRepository {
         val request = PagingRequest(10, 20)
         return withContext(Dispatchers.IO) {
             val result =
-                RetrofitHelper.getInstance().create(AlbumApi::class.java).getAlbumsHot(request)
+                RetrofitHelper.albumApi.getAlbumsHot(request)
             if (result.isSuccessful) {
                 Result.Success(result.body()!!)
             } else {
@@ -25,7 +25,7 @@ class AlbumRepositoryImpl : AlbumRepository {
 
     override suspend fun getAllAlbums(): Result<AlbumList> {
         return withContext(Dispatchers.IO) {
-            val result = RetrofitHelper.getInstance().create(AlbumApi::class.java).getAllAlbums()
+            val result = RetrofitHelper.albumApi.getAllAlbums()
             if (result.isSuccessful) {
                 Result.Success(result.body()!!)
             } else {
@@ -37,7 +37,7 @@ class AlbumRepositoryImpl : AlbumRepository {
     override suspend fun getDetailAlbum(id: String): Result<SongList> {
         return withContext(Dispatchers.IO) {
             val result =
-                RetrofitHelper.getInstance().create(AlbumApi::class.java).getDetailAlbum(id)
+                RetrofitHelper.albumApi.getDetailAlbum(id)
             if (result.isSuccessful) {
                 Result.Success(result.body()!!)
             } else {

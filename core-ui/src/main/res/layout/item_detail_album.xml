@@ -38,7 +38,7 @@
         android:layout_marginBottom="4dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintEnd_toStartOf="@+id/btn_next"
         app:layout_constraintStart_toEndOf="@+id/cardView" />
 
     <TextView
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

@@ -1,20 +1,27 @@
 package com.danh.feature_recommended
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danh.core_navigation.home.RecommendedNavigation
 import com.danh.core_network.model.song.Song
+import com.danh.feature_player.MiniPlayer
+import com.danh.feature_player.MiniPlayerHost
 import com.danh.feature_player.SongService
 import com.danh.feature_recommended.adapter.RSAdapter
 import com.danh.feature_recommended.databinding.FragmentRecommendedSongBinding
 import com.danh.feature_recommended.viewmodel.RSViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.util.concurrent.ListenableFuture
+
 class RecommendedSong( ) : Fragment() {
+    private var controller: MediaController?=null
     private val navigator: RecommendedNavigation by lazy {
         requireActivity() as RecommendedNavigation
     }
@@ -46,11 +53,13 @@ class RecommendedSong( ) : Fragment() {
 
     private fun setUpViews() {
         recommendedSongAdapter= RSAdapter(mutableListOf(),object : RSAdapter.OnClickItem{
+            @SuppressLint("UnsafeOptInUsageError")
             override fun playMusic(
                 songList: List<Song>,
                 position: Int
             ) {
-                SongService.startPlay(requireActivity(),songList,position)
+                (requireActivity() as MiniPlayerHost).showMiniPlayer()
+                SongService.startPlay(requireContext(),songList,position)
             }
 
         })
