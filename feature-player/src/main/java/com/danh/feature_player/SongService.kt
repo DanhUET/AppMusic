@@ -34,11 +34,7 @@ class SongService : MediaSessionService() {
 
     override fun onCreate() {
         super.onCreate()
-
-        // 1. Tạo ExoPlayer
         player = ExoPlayer.Builder(this).build()
-
-        // 2. Tạo MediaSession gắn với player
         mediaSession = MediaSession.Builder(this, player!!)
             .setId("DanhMusicSession")
             .build()
@@ -87,18 +83,18 @@ class SongService : MediaSessionService() {
             }
             ACTION_NEXT -> {
                 player?.seekToNextMediaItem()
-                startForegroundWithNotification() // cập nhật title/ảnh bài mới
+    //            startForegroundWithNotification() // cập nhật title/ảnh bài mới
             }
 
             ACTION_PREV -> {
                 player?.seekToPreviousMediaItem()
-                startForegroundWithNotification()
+    //            startForegroundWithNotification()
             }
 
             ACTION_PLAY_PAUSE -> {
                 player?.let { p ->
                     if (p.isPlaying) p.pause() else p.play()
-                    startForegroundWithNotification()
+    //                startForegroundWithNotification()
                 }
             }
         }

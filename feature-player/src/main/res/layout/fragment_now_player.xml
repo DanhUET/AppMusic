@@ -10,11 +10,22 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_nowPlay"
@@ -26,7 +37,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_album_nowplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -35,42 +46,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_nowPlay"
         android:layout_width="360dp"
         android:layout_height="360dp"
         android:layout_marginTop="32dp"
-        app:cardCornerRadius="180dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gird"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/gird" />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toBottomOf="@id/tv_album_nowplay"
+        app:shapeAppearanceOverlay="@style/CircleImage" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_title_nowplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+        app:layout_constraintEnd_toEndOf="@+id/image_nowPlay"
+        app:layout_constraintStart_toStartOf="@+id/image_nowPlay"
+        app:layout_constraintTop_toBottomOf="@+id/image_nowPlay" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_artist_nowplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_nowplay"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_nowplay"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_nowplay" />
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -78,8 +84,88 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:src="@drawable/ic_favorite"
-        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_artist_nowplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="@+id/tv_title_nowplay" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_artist_nowplay" />
+
+    <TextView
+        android:id="@+id/tv_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <TextView
+        android:id="@+id/tv_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/seekBar"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+    <ImageButton
+        android:id="@+id/btn_play_pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_pause"
+        app:layout_constraintEnd_toEndOf="@+id/tv_end"
+        app:layout_constraintStart_toStartOf="@+id/tv_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_start" />
+
+    <ImageButton
+        android:id="@+id/btn_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_skip_next"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_replay"
+        app:layout_constraintEnd_toStartOf="@+id/btn_replay"
+        app:layout_constraintStart_toEndOf="@+id/btn_play_pause"
+        app:layout_constraintTop_toTopOf="@+id/btn_replay" />
+
+    <ImageButton
+        android:id="@+id/btn_prevours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_skip_previous"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_play_pause"
+        app:layout_constraintEnd_toStartOf="@+id/btn_play_pause"
+        app:layout_constraintStart_toEndOf="@+id/btn_mix"
+        app:layout_constraintTop_toTopOf="@+id/btn_play_pause" />
+
+    <ImageButton
+        android:id="@+id/btn_mix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_mic"
+        app:layout_constraintStart_toStartOf="@+id/tv_start"
+        app:layout_constraintTop_toBottomOf="@+id/tv_start" />
+
+    <ImageButton
+        android:id="@+id/btn_replay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_repeat_off"
+        app:layout_constraintEnd_toEndOf="@+id/tv_end"
+        app:layout_constraintTop_toBottomOf="@+id/tv_end" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

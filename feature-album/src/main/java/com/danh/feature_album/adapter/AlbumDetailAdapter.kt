@@ -9,7 +9,10 @@ import com.danh.core_network.model.song.Song
 import com.danh.core_ui.databinding.ItemDetailAlbumBinding
 import com.danh.feature_album.databinding.FragmentDetailAlbumBinding
 
-class AlbumDetailAdapter(private val songList: MutableList<Song>) :
+class AlbumDetailAdapter(
+    private val songList: MutableList<Song>,
+    private val listener: OnClickItem
+) :
     RecyclerView.Adapter<AlbumDetailAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,12 +31,15 @@ class AlbumDetailAdapter(private val songList: MutableList<Song>) :
     }
 
     override fun getItemCount() = songList.size
-    class ViewHolder(private val binding: ItemDetailAlbumBinding) :
+    inner class ViewHolder(private val binding: ItemDetailAlbumBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(song: Song) {
             binding.tvItemTitle.text = song.title
             binding.tvItemArtist.text = song.artist
             Glide.with(binding.root).load(song.image).into(binding.imageItem)
+            binding.root.setOnClickListener {
+                listener.clickItem(songList, bindingAdapterPosition)
+            }
         }
     }
 
@@ -42,5 +48,9 @@ class AlbumDetailAdapter(private val songList: MutableList<Song>) :
         songList.clear()
         songList.addAll(songs)
         notifyDataSetChanged()
+    }
+
+    interface OnClickItem {
+        fun clickItem(songList: List<Song>, position: Int)
     }
 }

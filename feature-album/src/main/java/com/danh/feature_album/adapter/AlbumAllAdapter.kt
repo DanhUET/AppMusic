@@ -8,7 +8,10 @@ import com.bumptech.glide.Glide
 import com.danh.core_network.model.albums.Album
 import com.danh.core_ui.databinding.ItemMoreAlbumBinding
 
-class AlbumAllAdapter(private val albumsList: MutableList<Album>) :
+class AlbumAllAdapter(
+    private val albumsList: MutableList<Album>,
+    private val listener: OnItemClick
+) :
     RecyclerView.Adapter<AlbumAllAdapter.ViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,11 +28,14 @@ class AlbumAllAdapter(private val albumsList: MutableList<Album>) :
 
     override fun getItemCount() = albumsList.size
 
-    class ViewHolder(private val binding: ItemMoreAlbumBinding) :
+    inner class ViewHolder(private val binding: ItemMoreAlbumBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(album: Album) {
             binding.title.text = album.name
             Glide.with(binding.root).load(album.image).into(binding.imageAlbum)
+            binding.imageAlbum.setOnClickListener {
+                listener.clickItem(album)
+            }
         }
     }
 
@@ -38,5 +44,9 @@ class AlbumAllAdapter(private val albumsList: MutableList<Album>) :
         albumsList.clear()
         albumsList.addAll(allAlbums)
         notifyDataSetChanged()
+    }
+
+    interface OnItemClick {
+        fun clickItem(album: Album)
     }
 }

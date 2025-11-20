@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.danh.core_navigation.home.AlbumsNavigation
+import com.danh.core_network.model.albums.Album
 import com.danh.feature_album.R
 import com.danh.feature_album.adapter.AlbumAllAdapter
 import com.danh.feature_album.databinding.FragmentListAlbumsBinding
@@ -22,7 +23,9 @@ class ListAlbums : Fragment() {
     private lateinit var binding: FragmentListAlbumsBinding
     private lateinit var adapter: AlbumAllAdapter
     private lateinit var viewmodel: AlbumAllViewHolder
-
+    private val navigator: AlbumsNavigation by lazy {
+        requireActivity() as AlbumsNavigation
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -46,16 +49,22 @@ class ListAlbums : Fragment() {
         (requireActivity() as AppCompatActivity)
             .supportActionBar
             ?.setDisplayShowTitleEnabled(false)
+
         setUpViews()
     }
 
     private fun setUpViews() {
-        adapter= AlbumAllAdapter(mutableListOf())
+        adapter= AlbumAllAdapter(mutableListOf(),object : AlbumAllAdapter.OnItemClick{
+            override fun clickItem(album: Album) {
+                navigator.openDetailAlbum(this@ListAlbums,album.id)
+            }
+
+        })
         viewmodel= AlbumAllViewHolder()
         binding.rcyAllAlbum.adapter=adapter
         binding.rcyAllAlbum.layoutManager = GridLayoutManager(
             requireContext(),
-            2,                       // số cột
+            2,
             RecyclerView.VERTICAL,
             false
         )

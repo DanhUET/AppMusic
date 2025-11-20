@@ -1,5 +1,4 @@
 package com.danh.feature_player
-
 import android.content.ComponentName
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -87,11 +86,11 @@ class MiniPlayer : Fragment() {
         if (artUri != null) {
             Glide.with(this)
                 .load(artUri)
-//                .placeholder(R.drawable.ic_music_placeholder) // ảnh mặc định
+                .placeholder(R.drawable.ic_blur) // ảnh mặc định
                 .centerCrop()
                 .into(binding.image)
         } else {
-//            binding.imgCover.setImageResource(R.drawable.ic_music_placeholder)
+            binding.image.setImageResource(R.drawable.ic_blur)
         }
 
         // Icon play/pause
@@ -103,5 +102,12 @@ class MiniPlayer : Fragment() {
         controllerFuture?.let { MediaController.releaseFuture(it) }
         controller = null
         super.onStop()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.root.setOnClickListener {
+            NowPlayer().show(requireActivity().supportFragmentManager, "MyDialog")
+        }
     }
 }

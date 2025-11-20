@@ -1,5 +1,6 @@
 package com.danh.feature_album.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,10 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.danh.core_network.model.song.Song
 import com.danh.feature_album.R
 import com.danh.feature_album.adapter.AlbumDetailAdapter
 import com.danh.feature_album.databinding.FragmentDetailAlbumBinding
 import com.danh.feature_album.viewmodel.AlbumDetailViewModel
+import com.danh.feature_player.MiniPlayerHost
+import com.danh.feature_player.SongService
 
 class DetailAlbum : Fragment() {
     private lateinit var binding: FragmentDetailAlbumBinding
@@ -45,27 +49,38 @@ class DetailAlbum : Fragment() {
         setUpViews()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setUpViews() {
-        adapter= AlbumDetailAdapter(mutableListOf())
+        adapter = AlbumDetailAdapter(mutableListOf(),object : AlbumDetailAdapter.OnClickItem{
+            @SuppressLint("UnsafeOptInUsageError")
+            override fun clickItem(
+                songList: List<Song>,
+                position: Int
+            ) {
+                (requireActivity() as MiniPlayerHost).showMiniPlayer()
+                SongService.startPlay(requireContext(),songList,position)
+            }
+
+        })
+
         val messageId = arguments?.getString("idAlbum", "0")
-        val number=arguments?.getString("number")
-        val image=arguments?.getString("image")
-        val title= arguments?.getString("title")
-        binding.rcyDetailAlbum.adapter=adapter
-        binding.rcyDetailAlbum.layoutManager= LinearLayoutManager(requireContext())
-        viewmodel= AlbumDetailViewModel(messageId!!)
-        viewmodel.detailAlbumList.observe(viewLifecycleOwner){
-            if(it!=null){
-                binding.progress.visibility=View.GONE
+        binding.rcyDetailAlbum.adapter = adapter
+        binding.rcyDetailAlbum.layoutManager = LinearLayoutManager(requireContext())
+        viewmodel = AlbumDetailViewModel(messageId!!)
+        viewmodel.detailAlbumList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                binding.progress.visibility = View.GONE
                 adapter.updateSongs(it)
-            }else{
-                binding.progress.visibility= View.VISIBLE
+                val firstSong = it.first()
+                val songlist = it
+                Glide.with(binding.root).load(firstSong.image).into(binding.imageAlbum)
+                binding.title.text = firstSong.title
+                binding.number.text = "Number of songs: ${songlist.size}"
+            } else {
+                binding.progress.visibility = View.VISIBLE
             }
         }
-        Glide.with(binding.root).load(image).into(binding.imageAlbum)
-        binding.title.text=title
-        binding.number.text="Number of songs: ${number}"
-        binding.progress.visibility= View.VISIBLE
+        binding.progress.visibility = View.VISIBLE
         viewmodel.getDetailAlbum()
     }
 }

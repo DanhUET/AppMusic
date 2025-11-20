@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/nav_home">
-    <include app:graph="@navigation/nav_home"/>
-    <include app:graph="@navigation/nav_library"/>
-    <include app:graph="@navigation/nav_discovery"/>
+    <include app:graph="@navigation/nav_library" />
+    <include app:graph="@navigation/nav_discovery" />
+    <include app:graph="@navigation/nav_album" />
+        <include app:graph="@navigation/nav_home" />
+    <action
+        android:id="@+id/action_global_fr_album_detail"
+        app:destination="@+id/nav_album"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"
+        app:popUpTo="@id/nav_album" />
 </navigation>

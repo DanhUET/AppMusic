@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Theme cho NowPlayer BottomSheet -->
+    <style name="NowPlayerBottomSheetDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/NowPlayerBottomSheetStyle</item>
+    </style>
+
+    <style name="NowPlayerBottomSheetStyle" parent="Widget.MaterialComponents.BottomSheet.Modal">
+        <!-- nền trắng -->
+        <item name="backgroundTint">@android:color/white</item>
+        <!-- bỏ bo tròn ở trên để nhìn giống full screen -->
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.NowPlayer</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.NowPlayer" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+    </style>
+
+</resources>

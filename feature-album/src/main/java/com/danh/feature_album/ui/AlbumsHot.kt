@@ -46,7 +46,7 @@ class AlbumsHot : Fragment() {
     private fun setUpViews() {
         adapter= AlbumHotAdapter(mutableListOf(),object: AlbumHotAdapter.OnClickItem{
             override fun getDetailAlbum(album: Album) {
-                navigator.openDetailAlbum(this@AlbumsHot,album.id,album.size,album.image,album.name)
+                navigator.openDetailAlbum(this@AlbumsHot,album.id)
             }
 
         } )

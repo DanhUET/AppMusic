@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigatio
         AppAlbumNavigation().openMoreAlbums(from)
     }
 
-    override fun openDetailAlbum(from: Fragment,id:String,number:String,image:String,title:String) {
-        AppAlbumNavigation().openDetailAlbum(from,id,number,image,title)
+    override fun openDetailAlbum(from: Fragment,id:String) {
+        AppAlbumNavigation().openDetailAlbum(from,id)
     }
 
     override fun showMiniPlayer() {

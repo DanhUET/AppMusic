@@ -6,19 +6,16 @@ import androidx.navigation.fragment.findNavController
 import com.danh.core_navigation.home.AlbumsNavigation
 import com.danh.feature_home.R
 
-class AppAlbumNavigation: AlbumsNavigation {
+class AppAlbumNavigation : AlbumsNavigation {
     override fun openMoreAlbums(from: Fragment) {
         from.findNavController().navigate(R.id.action_fragment_home_to_fragment_more_albums)
     }
 
-    override fun openDetailAlbum(from: Fragment,id:String,number:String,image:String,title:String) {
+    override fun openDetailAlbum(from: Fragment, id: String) {
         val bundle = Bundle().apply {
             putString("idAlbum", id)
-            putString("number",number)
-            putString("image",image)
-            putString("title",title)
         }
-       from.findNavController().navigate(R.id.action_fragment_home_to_fragment_detail_album,bundle)
-
+        from.findNavController()
+            .navigate(com.danh.appmusic.R.id.action_global_fr_album_detail, bundle)
     }
 }
