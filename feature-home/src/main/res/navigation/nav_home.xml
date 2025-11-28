@@ -38,7 +38,7 @@
         tools:layout="@layout/fragment_list_albums" />
     <fragment
         android:id="@+id/fragment_more_recommended"
-        android:name="com.danh.feature_recommended.RecommendedAllSong"
+        android:name="com.danh.feature_recommended.ui.RecommendedAllSong"
         android:label="RecommendedAllSong"
         tools:layout="@layout/fragment_recommended_all_song" />
     <fragment

@@ -8,7 +8,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 35
+        minSdk = 28
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.shimmer)
     implementation(project(":feature-player"))
     implementation(project(":core-navigation"))
     implementation(project(":core-network"))

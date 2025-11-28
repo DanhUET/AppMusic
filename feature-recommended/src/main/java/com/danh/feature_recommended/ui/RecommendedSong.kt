@@ -1,7 +1,6 @@
-package com.danh.feature_recommended
+package com.danh.feature_recommended.ui
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,14 +10,13 @@ import android.widget.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danh.core_navigation.home.RecommendedNavigation
 import com.danh.core_network.model.song.Song
-import com.danh.feature_player.MiniPlayer
+import com.danh.core_ui.ui.SongBlurAdapter
 import com.danh.feature_player.MiniPlayerHost
 import com.danh.feature_player.SongService
 import com.danh.feature_recommended.adapter.RSAdapter
 import com.danh.feature_recommended.databinding.FragmentRecommendedSongBinding
 import com.danh.feature_recommended.viewmodel.RSViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.util.concurrent.ListenableFuture
 
 class RecommendedSong( ) : Fragment() {
     private var controller: MediaController?=null
@@ -28,6 +26,7 @@ class RecommendedSong( ) : Fragment() {
     private lateinit var binding: FragmentRecommendedSongBinding
     private lateinit var recommendedSongAdapter: RSAdapter
     private lateinit var recommendedViewModel : RSViewModel
+    private lateinit var adapterBlurSong: SongBlurAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -44,7 +43,7 @@ class RecommendedSong( ) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViews()
-        recommendedViewModel.getRecommendedSong()
+
         binding.btnAllSong.setOnClickListener {
             navigator.openMoreRecommended(this)
         }
@@ -63,20 +62,21 @@ class RecommendedSong( ) : Fragment() {
             }
 
         })
+        adapterBlurSong= SongBlurAdapter()
         binding.rcyRS.adapter=recommendedSongAdapter
         binding.rcyRS.layoutManager = LinearLayoutManager(requireContext())
+        binding.rcyBlur.adapter=adapterBlurSong
+        binding.rcyBlur.layoutManager= LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         recommendedViewModel= RSViewModel()
         recommendedViewModel.listSong.observe(viewLifecycleOwner){
-            if(it!=null){
-                recommendedSongAdapter.updateSongs(it)
+            if(it==null){
+                binding.shimmerLayout.visibility= View.VISIBLE
             }else{
-                Snackbar.make(
-                    binding.root,
-                    "cc",
-                    Snackbar.LENGTH_LONG
-                ).show()
+                binding.shimmerLayout.visibility=View.GONE
+                recommendedSongAdapter.updateSongs(it)
             }
         }
+        recommendedViewModel.getRecommendedSong()
     }
 
 }

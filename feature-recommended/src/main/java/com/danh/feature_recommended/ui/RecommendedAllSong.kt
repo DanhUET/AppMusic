@@ -1,4 +1,4 @@
-package com.danh.feature_recommended
+package com.danh.feature_recommended.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.danh.core_network.model.song.Song
 import com.danh.feature_player.MiniPlayerHost
 import com.danh.feature_player.SongService

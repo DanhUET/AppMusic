@@ -18,6 +18,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageButton
+            android:background="@android:color/transparent"
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -118,6 +119,7 @@
         app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
     <ImageButton
+        android:background="@android:color/transparent"
         android:id="@+id/btn_play_pause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -131,6 +133,7 @@
         android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:src="@drawable/ic_skip_next"
         app:layout_constraintBottom_toBottomOf="@+id/btn_replay"
         app:layout_constraintEnd_toStartOf="@+id/btn_replay"
@@ -138,6 +141,7 @@
         app:layout_constraintTop_toTopOf="@+id/btn_replay" />
 
     <ImageButton
+        android:background="@android:color/transparent"
         android:id="@+id/btn_prevours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -148,6 +152,7 @@
         app:layout_constraintTop_toTopOf="@+id/btn_play_pause" />
 
     <ImageButton
+        android:background="@android:color/transparent"
         android:id="@+id/btn_mix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -158,6 +163,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_start" />
 
     <ImageButton
+        android:background="@android:color/transparent"
         android:id="@+id/btn_replay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

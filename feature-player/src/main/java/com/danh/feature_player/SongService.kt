@@ -9,6 +9,7 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.os.IBinder
 import android.os.Parcelable
 import androidx.annotation.OptIn
@@ -34,10 +35,22 @@ class SongService : MediaSessionService() {
 
     override fun onCreate() {
         super.onCreate()
+        createNotificationChannel()
         player = ExoPlayer.Builder(this).build()
         mediaSession = MediaSession.Builder(this, player!!)
             .setId("DanhMusicSession")
             .build()
+    }
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                "Phát nhạc AppMusic",
+                NotificationManager.IMPORTANCE_LOW
+            )
+            val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            nm.createNotificationChannel(channel)
+        }
     }
 
     // 3. Trả về session cho các controller (UI) kết nối
@@ -50,11 +63,16 @@ class SongService : MediaSessionService() {
         super.onStartCommand(intent, flags, startId)
         when (intent?.action) {
             ACTION_START -> {
+
                 val position = intent.getIntExtra("position", 0)
                 val songList = intent.getParcelableArrayListExtra<Song>("songList") ?: arrayListOf()
                 if (songList.isNotEmpty()) {
                     // Ví dụ: set playlist cho ExoPlayer
                     val mediaItems = songList.map { song ->
+                        val bundle = Bundle().apply {
+                            putParcelable("song", song)
+                        }
+
                         MediaItem.Builder()
                             .setUri(song.source)
                             .setMediaId(song.id)
@@ -62,6 +80,7 @@ class SongService : MediaSessionService() {
                                 MediaMetadata.Builder()
                                     .setTitle(song.title)
                                     .setArtist(song.artist)
+                                    .setExtras(bundle)
                                     .setArtworkUri(song.image.toUri())
                                     .build()
                             )
@@ -76,82 +95,12 @@ class SongService : MediaSessionService() {
                         playWhenReady = true
                         play()
                     }
-
-                    // Đảm bảo đã startForeground với notification
-//                    startForegroundWithNotification()
-                }
-            }
-            ACTION_NEXT -> {
-                player?.seekToNextMediaItem()
-    //            startForegroundWithNotification() // cập nhật title/ảnh bài mới
-            }
-
-            ACTION_PREV -> {
-                player?.seekToPreviousMediaItem()
-    //            startForegroundWithNotification()
-            }
-
-            ACTION_PLAY_PAUSE -> {
-                player?.let { p ->
-                    if (p.isPlaying) p.pause() else p.play()
-    //                startForegroundWithNotification()
                 }
             }
         }
 
         return START_STICKY
     }
-
-    // 5. Tạo notification dạng MediaStyle + đưa service lên foreground
-    @UnstableApi
-    private fun startForegroundWithNotification() {
-        val session = mediaSession ?: return
-        val p = session.player
-
-        val notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                "Music playback",
-                NotificationManager.IMPORTANCE_LOW
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
-        val preIntent=Intent(this, SongService::class.java).apply { action=ACTION_PREV }
-        val nextIntent=Intent(this, SongService::class.java).apply { action=ACTION_NEXT }
-        val playPauseIntent = Intent(this, SongService::class.java).apply { action = ACTION_PLAY_PAUSE }
-
-        val flags = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-
-        val prevPendingIntent = PendingIntent.getService(this, 0, preIntent, flags)
-        val nextPendingIntent = PendingIntent.getService(this, 1, nextIntent, flags)
-        val playPausePendingIntent = PendingIntent.getService(this, 2, playPauseIntent, flags)
-
-        val style = MediaStyleNotificationHelper.MediaStyle(session)
-
-        val title = p.mediaMetadata.title ?: "Đang phát nhạc"
-        val artist = p.mediaMetadata.artist ?: ""
-
-        val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(com.danh.core_ui.R.drawable.ic_error_music) // icon của bạn
-            .setContentTitle(title)
-            .setContentText(artist)
-            .setStyle(style)
-            .setContentIntent(session.sessionActivity) // mở UI khi bấm notification
-            .setOngoing(true)
-            .addAction(R.drawable.ic_skip_previous, "Prev", prevPendingIntent)
-            .addAction(
-                if (p.isPlaying) R.drawable.ic_pause else R.drawable.ic_play,
-                if (p.isPlaying) "Pause" else "Play",
-                playPausePendingIntent
-            )
-            .addAction(R.drawable.ic_skip_next, "Next", nextPendingIntent)
-            .build()
-        startForeground(NOTIFICATION_ID, notification)
-    }
-
     override fun onDestroy() {
         mediaSession?.release()
         mediaSession = null
@@ -159,14 +108,11 @@ class SongService : MediaSessionService() {
         player = null
         super.onDestroy()
     }
-
     companion object {
-        private const val CHANNEL_ID = "music_channel"
-        private const val NOTIFICATION_ID = 1
         private const val ACTION_START = "action_start"
-        private const val ACTION_NEXT = "action_next"
-        private const val ACTION_PREV = "action_prev"
-        private const val ACTION_PLAY_PAUSE = "action_play_pause"
+        private const val CHANNEL_ID = "song_playback"
+        private const val NOTIFICATION_ID = 1
+
         fun startPlay(context: Context, songList: List<Song>, position: Int) {
             val intent = Intent(context, SongService::class.java).apply {
                 action = ACTION_START

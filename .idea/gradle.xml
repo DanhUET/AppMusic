@@ -17,9 +17,11 @@
             <option value="$PROJECT_DIR$/core-ui" />
             <option value="$PROJECT_DIR$/feature-album" />
             <option value="$PROJECT_DIR$/feature-discovery" />
+            <option value="$PROJECT_DIR$/feature-favorite-songs" />
             <option value="$PROJECT_DIR$/feature-home" />
             <option value="$PROJECT_DIR$/feature-library" />
             <option value="$PROJECT_DIR$/feature-player" />
+            <option value="$PROJECT_DIR$/feature-playlist" />
             <option value="$PROJECT_DIR$/feature-recent-heard" />
             <option value="$PROJECT_DIR$/feature-recommended" />
           </set>
