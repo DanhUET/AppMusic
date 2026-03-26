@@ -9,5 +9,20 @@
         android:id="@+id/discovery"
         android:name="com.danh.feature_discovery.Discovery"
         android:label="fragment_discovery"
-        tools:layout="@layout/fragment_discovery" />
+        tools:layout="@layout/fragment_discovery" >
+        <action
+            android:id="@+id/action_discovery_to_allArtist"
+            app:destination="@id/allArtist" />
+        <action
+            android:id="@+id/action_discovery_to_informationArtist"
+            app:destination="@id/informationArtist" />
+    </fragment>
+    <fragment
+        android:id="@+id/allArtist"
+        android:name="com.danh.feature_artists.ui.AllArtist"
+        android:label="AllArtist" />
+    <fragment
+        android:id="@+id/informationArtist"
+        android:name="com.danh.feature_artists.ui.InformationArtist"
+        android:label="InformationArtist" />
 </navigation>

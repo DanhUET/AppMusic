@@ -4,32 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecentHeard">
-
+    tools:context=".ui.AllArtist">
 
     <TextView
-        android:id="@+id/tv_title_artist"
-        android:layout_width="0dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:paddingTop="5dp"
-        android:paddingEnd="5dp"
-        android:text="TextView"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:text="List of artists"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent" />
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcy"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_artist"
-        tools:listitem="@layout/item_song" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

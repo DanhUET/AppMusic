@@ -1,5 +1,8 @@
 package com.danh.core_network.resource
 
+import com.danh.core_network.resource.Albums.AlbumApi
+import com.danh.core_network.resource.Artist.ArtistApi
+import com.danh.core_network.resource.Songs.SongApi
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,5 +21,8 @@ object RetrofitHelper {
     }
     val albumApi: AlbumApi by lazy {
         retrofit.create(AlbumApi::class.java)
+    }
+    val artistApi: ArtistApi by lazy {
+        retrofit.create(ArtistApi::class.java)
     }
 }

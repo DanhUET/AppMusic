@@ -3,7 +3,7 @@ package com.danh.core_network.repository.albums
 import com.danh.core_network.model.albums.AlbumList
 import com.danh.core_network.model.pagingRequest.PagingRequest
 import com.danh.core_network.model.song.SongList
-import com.danh.core_network.resource.AlbumApi
+import com.danh.core_network.resource.Albums.AlbumApi
 import com.danh.core_network.resource.Result
 import com.danh.core_network.resource.RetrofitHelper
 import kotlinx.coroutines.Dispatchers

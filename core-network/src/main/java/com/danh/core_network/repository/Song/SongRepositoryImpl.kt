@@ -4,7 +4,7 @@ import com.danh.core_network.model.pagingRequest.PagingRequest
 import com.danh.core_network.model.song.SongList
 import com.danh.core_network.resource.Result
 import com.danh.core_network.resource.RetrofitHelper
-import com.danh.core_network.resource.SongApi
+import com.danh.core_network.resource.Songs.SongApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

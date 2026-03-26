@@ -1,4 +1,4 @@
-package com.danh.core_network.resource
+package com.danh.core_network.resource.Songs
 
 import com.danh.core_network.model.pagingRequest.PagingRequest
 import com.danh.core_network.model.song.SongList
@@ -13,4 +13,3 @@ interface SongApi {
     @POST("services.php/songs")
     suspend fun getRecommendedSongs(@Body request: PagingRequest): Response<SongList>
 }
-

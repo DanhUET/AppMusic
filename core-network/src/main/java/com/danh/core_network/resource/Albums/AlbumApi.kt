@@ -1,4 +1,4 @@
-package com.danh.core_network.resource
+package com.danh.core_network.resource.Albums
 
 import com.danh.core_network.model.albums.AlbumList
 import com.danh.core_network.model.pagingRequest.PagingRequest
@@ -7,7 +7,6 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AlbumApi {

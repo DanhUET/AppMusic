@@ -13,13 +13,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.danh.appmusic.databinding.ActivityMainBinding
+import com.danh.appmusic.navigition.discovery.AppArtistNavigation
 import com.danh.appmusic.navigition.home.AppAlbumNavigation
 import com.danh.appmusic.navigition.home.AppRecommendedNavigator
 import com.danh.core_navigation.home.AlbumsNavigation
 import com.danh.core_navigation.home.RecommendedNavigation
+import com.danh.core_navigation.library.ArtistsNavigation
 import com.danh.feature_player.MiniPlayerHost
 
-class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigation, MiniPlayerHost {
+class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigation, MiniPlayerHost,
+    ArtistsNavigation {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,5 +66,13 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigatio
 
     override fun hideMiniPlayer() {
        binding.fragmentMiniPlayer.visibility=View.GONE
+    }
+
+    override fun openMoreArtist(from: Fragment) {
+        AppArtistNavigation().openMoreArtist(from)
+    }
+
+    override fun openInformationArtist() {
+        TODO("Not yet implemented")
     }
 }
