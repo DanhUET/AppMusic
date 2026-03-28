@@ -25,4 +25,5 @@ object RetrofitHelper {
     val artistApi: ArtistApi by lazy {
         retrofit.create(ArtistApi::class.java)
     }
+
 }

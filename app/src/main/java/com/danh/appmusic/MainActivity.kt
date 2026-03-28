@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigatio
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(bars.left, bars.top, bars.right, 0)   // <-- bottom = 0
-            insets  // KHÔNG CONSUME ở đây
+            v.setPadding(bars.left, bars.top, bars.right, 0)
+            insets
         }
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomNavigationView) { v, insets ->
             val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -43,11 +43,9 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigatio
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        // thiết lập bottom navigation
         val bottomNavigationView = binding.bottomNavigationView
         bottomNavigationView.setupWithNavController(navController)
     }
-
     override fun openMoreRecommended(from: Fragment) {
         AppRecommendedNavigator().openMoreRecommended(from)
     }
@@ -72,7 +70,9 @@ class MainActivity : AppCompatActivity(), RecommendedNavigation, AlbumsNavigatio
         AppArtistNavigation().openMoreArtist(from)
     }
 
-    override fun openInformationArtist() {
-        TODO("Not yet implemented")
+    override fun openInformationArtist(id: String, from: Fragment) {
+        AppArtistNavigation().openInformationArtist(id,from)
     }
+
+
 }

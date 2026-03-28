@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.danh.appmusic"
-        minSdk = 35
+        minSdk = 26
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature-setting"))
     implementation(project(":feature-home"))
     implementation(project(":feature-library"))
     implementation(project(":feature-discovery"))

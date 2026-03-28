@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 class ArtistListViewModel(private val artistRepository: ArtistRepository = ArtistRepositoryImpl()): ViewModel() {
     private val _artistList: MutableLiveData<List<Artist>?> = MutableLiveData()
     var artistList: LiveData<List<Artist>?> = _artistList
+    private val _artistInfo: MutableLiveData<Artist?> = MutableLiveData()
+    var artistInfo: LiveData<Artist?> = _artistInfo
     fun listArtist(){
         viewModelScope.launch {
             val result=artistRepository.listArtist()
@@ -30,6 +32,16 @@ class ArtistListViewModel(private val artistRepository: ArtistRepository = Artis
                 _artistList.postValue(result.data.artists)
             }else{
                 _artistList.postValue(null)
+            }
+        }
+    }
+    fun informationArtist(id:String){
+        viewModelScope.launch {
+            val result=artistRepository.informationArtist(id)
+            if(result is Result.Success){
+                _artistInfo.postValue(result.data)
+            }else{
+                _artistInfo.postValue(null)
             }
         }
     }

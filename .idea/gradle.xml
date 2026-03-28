@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/feature-playlist" />
             <option value="$PROJECT_DIR$/feature-recent-heard" />
             <option value="$PROJECT_DIR$/feature-recommended" />
+            <option value="$PROJECT_DIR$/feature-setting" />
           </set>
         </option>
       </GradleProjectSettings>

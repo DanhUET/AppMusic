@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
+//    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -8,7 +10,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 33
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -40,9 +42,9 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-network"))
     // retrofit
-    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation(libs.retrofit)
 // retrofit gson-converter
-    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+    implementation(libs.converter.gson)
     // gson
     implementation("com.google.code.gson:gson:2.10.1")
 // glide
@@ -60,4 +62,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+//    implementation("com.google.dagger:hilt-android:2.57.1")
+//    ksp("com.google.dagger:hilt-android-compiler:2.57.1")
 }

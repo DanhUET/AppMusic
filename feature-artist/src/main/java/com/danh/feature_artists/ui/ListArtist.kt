@@ -53,6 +53,7 @@ class ListArtist : Fragment() {
     private fun setUpViews() {
         adapterArtist=ArtistAdapter(mutableListOf(),object: ArtistAdapter.OnClickItem{
             override fun clickItem(position: String) {
+                navigator.openInformationArtist(position,this@ListArtist)
 
             }
         })

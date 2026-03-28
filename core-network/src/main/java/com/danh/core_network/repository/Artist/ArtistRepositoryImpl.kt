@@ -1,6 +1,7 @@
 package com.danh.core_network.repository.Artist
 
 import com.danh.core_network.model.albums.AlbumList
+import com.danh.core_network.model.artist.Artist
 import com.danh.core_network.model.artist.ArtistList
 import com.danh.core_network.model.pagingRequest.PagingRequest
 import com.danh.core_network.resource.RetrofitHelper
@@ -31,5 +32,16 @@ class ArtistRepositoryImpl: ArtistRepository {
             }
         }
 
+    }
+
+    override suspend fun informationArtist(id:String): Result<Artist> {
+        return withContext(Dispatchers.IO){
+            val response= RetrofitHelper.artistApi.getArtistById(id)
+            if(response.isSuccessful){
+                Result.Success(response.body()!!)
+            }else{
+                Result.Error(Exception(response.message()))
+            }
+        }
     }
 }

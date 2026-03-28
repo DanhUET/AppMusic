@@ -29,7 +29,7 @@ class ArtistAdapter(private val artists:MutableList<Artist>,private val listener
     inner class ViewHolder(private val binding: ItemArtistBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(artist: Artist){
             binding.tvName.text=artist.name
-            Glide.with(binding.root).load(artist.avatar).into(binding.imgAvatar)
+            Glide.with(binding.root).load(artist.avatar).into(binding.imgArtist)
             binding.root.setOnClickListener {
                 listener.clickItem(artists[bindingAdapterPosition].id)
             }

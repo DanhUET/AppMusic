@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         android:layout_width="150dp"
@@ -18,7 +17,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/imgAvatar"
+            android:id="@+id/img_artist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -30,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Artist name:"
         app:layout_constraintEnd_toEndOf="@+id/cardView2"
         app:layout_constraintStart_toStartOf="@+id/cardView2"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />
@@ -40,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Number of interst:"
         app:layout_constraintEnd_toEndOf="@+id/tv_title_artist"
         app:layout_constraintStart_toStartOf="@+id/tv_title_artist"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_artist" />
@@ -50,8 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Your interested artist:"
         app:layout_constraintEnd_toEndOf="@+id/tv_title_number"
         app:layout_constraintStart_toStartOf="@+id/tv_title_number"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_number" />
+    
 </androidx.constraintlayout.widget.ConstraintLayout>

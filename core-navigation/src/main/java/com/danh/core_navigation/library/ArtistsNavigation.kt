@@ -4,5 +4,5 @@ import androidx.fragment.app.Fragment
 
 interface ArtistsNavigation {
     fun openMoreArtist(from: Fragment)
-    fun openInformationArtist()
+    fun openInformationArtist(id:String,from: Fragment)
 }

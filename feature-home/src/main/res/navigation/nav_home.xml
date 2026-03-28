@@ -46,9 +46,5 @@
         android:id="@+id/fragment_detail_album"
         android:name="com.danh.feature_album.ui.DetailAlbum"
         android:label="DetailAlbum" >
-<!--        <argument-->
-<!--            android:name="idAlbum"-->
-<!--            app:argType="string"-->
-<!--            android:defaultValue="0" />-->
     </fragment>
 </navigation>
