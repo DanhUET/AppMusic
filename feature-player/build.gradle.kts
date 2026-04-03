@@ -8,7 +8,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 35
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -36,11 +36,13 @@ android {
 }
 
 dependencies {
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    implementation("androidx.media3:media3-exoplayer:1.8.0")
-    implementation("androidx.media3:media3-exoplayer-dash:1.8.0")
-    implementation("androidx.media3:media3-ui:1.8.0")
-    implementation("androidx.media3:media3-ui-compose:1.8.0")
+    implementation(project(":core-database"))
+    implementation("androidx.room:room-runtime:2.8.4")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation("androidx.media3:media3-exoplayer:1.10.0")
+    implementation("androidx.media3:media3-exoplayer-dash:1.10.0")
+    implementation("androidx.media3:media3-ui:1.10.0")
+    implementation("androidx.media3:media3-ui-compose:1.10.0")
     implementation(project(":core-ui"))
     implementation(project(":core-network"))
     implementation(libs.androidx.core.ktx)

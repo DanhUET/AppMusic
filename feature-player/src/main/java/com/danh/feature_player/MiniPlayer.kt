@@ -5,20 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.lifecycleScope
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionToken
+import com.SongFavoriteDatabase
 import com.bumptech.glide.Glide
 import com.danh.feature_player.databinding.FragmentMiniPlayerBinding
+import com.entity.song.SongFavorite
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
+import com.repository.SongFavoriteRepositoryImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MiniPlayer : Fragment() {
     private var controller: MediaController? = null
     private var controllerFuture: ListenableFuture<MediaController>? = null
     private lateinit var binding: FragmentMiniPlayerBinding
+    private lateinit var databaseSongFavorite: SongFavoriteDatabase
+    private var songFavoriteRepository: SongFavoriteRepositoryImpl?=null
+
 
     @UnstableApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,7 +61,15 @@ class MiniPlayer : Fragment() {
 
             // Nút Previous
             binding.btnFavorite.setOnClickListener {
-                controller?.seekToPreviousMediaItem()
+                    val id=c.currentMediaItem?.mediaId
+                    val title=c.currentMediaItem?.mediaMetadata?.title.toString()
+                    val artist=c.currentMediaItem?.mediaMetadata?.artist.toString()
+                    val image=c.currentMediaItem?.mediaMetadata?.artworkUri.toString()
+
+                val songFavorite= SongFavorite(id!!,title,artist,image)
+                lifecycleScope.launch(Dispatchers.IO) {
+                    songFavoriteRepository?.toggleFavorite(songFavorite)
+                }
             }
 
             // Play/Pause
@@ -69,6 +87,8 @@ class MiniPlayer : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMiniPlayerBinding.inflate(inflater, container, false)
+        databaseSongFavorite=SongFavoriteDatabase.getDatabase(requireContext())
+        songFavoriteRepository= SongFavoriteRepositoryImpl(databaseSongFavorite.getSongFavoriteDao())
         return binding.root
     }
     private fun updateMiniPlayerFromMetadata(
