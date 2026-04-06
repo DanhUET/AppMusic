@@ -1,6 +1,7 @@
 ﻿# Ứng dụng nghe nhạc tương tự zingmp3
 
 Ứng dụng nghe nhạc trên Android, được xây dựng theo kiến trúc đa module. Ứng dụng hỗ trợ phát nhạc, khám phá bài hát, tìm kiếm, quản lý playlist cá nhân và tùy chỉnh giao diện để nâng cao trải nghiệm người dùng.
+#Giao diện
 <img src="images/7c2d46ae-4693-4907-85fc-620f31a392b6.jpg" alt="Home" width="200"/>
 <img src="images/022cc77c-e8f3-4d60-a647-c36dd1423fb1.jpg" alt="Home" width="200"/>
 <img src="images/176fa7a4-1486-4039-9205-3045dd6a9fbb.jpg" alt="Home" width="200"/>
