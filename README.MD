@@ -1,8 +1,15 @@
 ﻿# Ứng dụng nghe nhạc tương tự zingmp3
 
 Ứng dụng nghe nhạc trên Android, được xây dựng theo kiến trúc đa module. Ứng dụng hỗ trợ phát nhạc, khám phá bài hát, tìm kiếm, quản lý playlist cá nhân và tùy chỉnh giao diện để nâng cao trải nghiệm người dùng.
-# [Home]
-<img src="images/7c2d46ae-4693-4907-85fc-620f31a392b6.jpg" alt="Home" width="250"/>
+<img src="images/7c2d46ae-4693-4907-85fc-620f31a392b6.jpg" alt="Home" width="200"/>
+<img src="images/022cc77c-e8f3-4d60-a647-c36dd1423fb1.jpg" alt="Home" width="200"/>
+<img src="images/176fa7a4-1486-4039-9205-3045dd6a9fbb.jpg" alt="Home" width="200"/>
+<img src="images/89915d0c-8d5a-433e-8a25-50258d1a5b9a.jpg" alt="Home" width="200"/>
+<img src="images/3160006a-ebfc-4448-bb26-46faff1bea33.jpg" alt="Home" width="200"/>
+<img src="images/b914af3b-149a-4564-a30c-f35f1e787873.jpg" alt="Home" width="200"/>
+<img src="images/cb049f69-057b-4ca1-a856-373aef9fca35.jpg" alt="Home" width="200"/>
+<img src="images/d7900781-5fab-429a-a9b8-26131b6a4fb4.jpg" alt="Home" width="200"/>
+<img src="images/f08cefa4-0c6d-47c4-8483-4bafb3f342c4.jpg" alt="Home" width="200"/>
 
 #Chức năng
 
